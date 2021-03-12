@@ -120,7 +120,7 @@ namespace Library.UnitTests
             Assert.AreEqual(expected, actual);
         }
 
-        [TestCase(0, 0)]
+        //[TestCase(0, 0)]
 
         public void GetNumbersInTheRangeTests(int integer, int[] expected)
         {
