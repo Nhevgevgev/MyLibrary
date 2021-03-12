@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System;
 
 namespace Library.UnitTests
 {
@@ -16,6 +17,17 @@ namespace Library.UnitTests
             Assert.AreEqual(expected, actual);
         }
 
+        [TestCase(0, 0)]
+        [TestCase(1, -1)]
+        [TestCase(2, -2)]
+        [TestCase(-1, -3)]
+        [TestCase(-2, -4)]
+
+        public void RaiseAToPowerBNegativeTests(int a, int b)
+        {
+            Assert.Throws<ArgumentException>(() => Cycles.RaiseAToPowerB(a, b));
+        }
+
         [TestCase(1000, new int[] { 1000 })]
         [TestCase(500, new int[] { 500, 1000 })]
         [TestCase(300, new int[] { 300, 600, 900 })]
@@ -26,6 +38,17 @@ namespace Library.UnitTests
         {
             int[] actual = Cycles.GetNumbersDivisibleByA(a);
             Assert.AreEqual(expected, actual);
+        }
+
+        [TestCase(0)]
+        [TestCase(-1)]
+        [TestCase(-22)]
+        [TestCase(1001)]
+        [TestCase(1022)]
+
+        public void GetNumbersDivisibleByANegativeTests(int a)
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => Cycles.GetNumbersDivisibleByA(a));
         }
 
         [TestCase(10, 3)]
@@ -40,6 +63,17 @@ namespace Library.UnitTests
             Assert.AreEqual(expected, actual);
         }
 
+        [TestCase(0)]
+        [TestCase(-1)]
+        [TestCase(-2)]
+        [TestCase(-101)]
+        [TestCase(-102)]
+
+        public void GetNumberOfPositiveIntegersWhoseSquareIsLessThanANegativeTests(int a)
+        {
+            Assert.Throws<ArgumentException>(() => Cycles.GetNumberOfPositiveIntegersWhoseSquareIsLessThanA(a));
+        }
+
         [TestCase(10, 5)]
         [TestCase(2, 1)]
         [TestCase(5, 1)]
@@ -50,6 +84,17 @@ namespace Library.UnitTests
         {
             int actual = Cycles.GetGreatestDivisor(a);
             Assert.AreEqual(expected, actual);
+        }
+
+        [TestCase(1)]
+        [TestCase(0)]
+        [TestCase(-1)]
+        [TestCase(-2)]
+        [TestCase(-100)]
+
+        public void GetGreatestDivisorNegativeTests(int a)
+        {
+            Assert.Throws<ArgumentException>(() => Cycles.GetGreatestDivisor(a));
         }
 
         [TestCase(0, 8, 7)]
@@ -76,6 +121,17 @@ namespace Library.UnitTests
             Assert.AreEqual(expected, actual);
         }
 
+        [TestCase(0)]
+        [TestCase(-1)]
+        [TestCase(-2)]
+        [TestCase(-101)]
+        [TestCase(-102)]
+
+        public void GetFibonacciNumberByIndexNegativeTests(int n)
+        {
+            Assert.Throws<ArgumentException>(() => Cycles.GetFibonacciNumberByIndex(n));
+        }
+
         [TestCase(1, 2, 1)]
         [TestCase(2, 1, 1)]
         [TestCase(11, 33, 11)]
@@ -88,13 +144,35 @@ namespace Library.UnitTests
             Assert.AreEqual(expected, actual);
         }
 
+        [TestCase(0, 0)]
+        [TestCase(0, 1)]
+        [TestCase(1, 0)]
+        [TestCase(-1, 2)]
+        [TestCase(2, -1)]
+
+        public void GetGreatestCommonFactorByEuclideanAlgorithmNegativeTests(int a, int b)
+        {
+            Assert.Throws<ArgumentException>(() => Cycles.GetGreatestCommonFactorByEuclideanAlgorithm(a, b));
+        }
+
         //[TestCase(100, 99)]
 
-        //public void GetNByHalfDivisionMethodTests(int n, int expected)
-        //{
-        //    int actual = Cycles.GetNByHalfDivisionMethod(n);
-        //    Assert.AreEqual(expected, actual);
-        //}
+        public void GetNByHalfDivisionMethodTests(int n, int expected)
+        {
+            int actual = Cycles.GetNByHalfDivisionMethod(n);
+            Assert.AreEqual(expected, actual);
+        }
+
+        //[TestCase(0)]
+        //[TestCase(-1)]
+        //[TestCase(-2)]
+        //[TestCase(-100)]
+        //[TestCase(-101)]
+
+        public void GetNByHalfDivisionMethodNegativeTests(int n)
+        {
+            Assert.Throws<ArgumentException>(() => Cycles.GetNByHalfDivisionMethod(n));
+        }
 
         [TestCase(1, new int[2] { 0, 1 })]
         [TestCase(2, new int[2] { 1, 0 })]
@@ -120,12 +198,51 @@ namespace Library.UnitTests
             Assert.AreEqual(expected, actual);
         }
 
-        //[TestCase(0, 0)]
+        [TestCase(5, new int[2] { 2, 4 })]
+        [TestCase(3, new int[1] { 2 })]
+        [TestCase(7, new int[3] { 2, 4, 6 })]
+        [TestCase(9, new int[4] { 2, 4, 6, 8 })]
+        [TestCase(10, new int[4] { 2, 4, 6, 8 })]
 
         public void GetNumbersInTheRangeTests(int integer, int[] expected)
         {
             int[] actual = Cycles.GetNumbersInTheRange(integer);
             Assert.AreEqual(expected, actual);
+        }
+
+        [TestCase(2)]
+        [TestCase(1)]
+        [TestCase(0)]
+        [TestCase(-1)]
+        [TestCase(-2)]
+
+        public void GetNumbersInTheRangeNegativeTests(int integer)
+        {
+            Assert.Throws<ArgumentException>(() => Cycles.GetNumbersInTheRange(integer));
+        }
+
+        [TestCase(1, 1, true)]
+        [TestCase(91, 18, true)]
+        [TestCase(123, 345, true)]
+        //[TestCase(19, 81, true)]
+        //[TestCase(132, 435, true)]
+        //[TestCase(321, 543, true)]
+
+        public void CheckDuplicateDigitsInNumbersTests(int a, int b, bool expected)
+        {
+            bool actual = Cycles.CheckDuplicateDigitsInNumbers(a, b);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestCase(0, 0)]
+        [TestCase(0, 1)]
+        [TestCase(2, 0)]
+        [TestCase(-1, 3)]
+        [TestCase(4, -2)]
+
+        public void CheckDuplicateDigitsInNumbersNegativeTests(int a, int b)
+        {
+            Assert.Throws<ArgumentException>(() => Cycles.CheckDuplicateDigitsInNumbers(a, b));
         }
     }
 }

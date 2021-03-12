@@ -23,7 +23,7 @@ namespace Library
 
         public static int[] GetNumbersDivisibleByA(int a)
         {
-            if (a > 0 || a < 1001)
+            if (a > 0 && a < 1001)
             {
                 int count = 0;
 
@@ -42,14 +42,15 @@ namespace Library
                 {
                     if (i % a == 0)
                     {
-                        array[j++] = i;
+                        array[j] = i;
+                        j++;
                     }
                 }
 
                 return array;
             }
 
-            throw new ArgumentException("A must be in range from 1 to 1000 inclusive");
+            throw new ArgumentOutOfRangeException("A must be in range from 1 to 1000 inclusive");
         }
 
         public static int GetNumberOfPositiveIntegersWhoseSquareIsLessThanA(int a)
@@ -144,7 +145,7 @@ namespace Library
 
         public static int GetGreatestCommonFactorByEuclideanAlgorithm(int a, int b)
         {
-            if (a > 0 || b > 0)
+            if (a > 0 && b > 0)
             {
                 while (a != b)
                 {
@@ -248,73 +249,80 @@ namespace Library
 
         public static int[] GetNumbersInTheRange(int integer)
         {
-            int number;
-            int digitOfNumber;
-            int count = 0;
-
-            for (int i = 1; i < integer; i++)
+            if (integer > 2)
             {
-                number = i;
-                int sumOdds = 0;
-                int sumEvens = 0;
+                int number;
+                int digitOfNumber;
+                int count = 0;
 
-                while (number != 0)
+                for (int i = 1; i < integer; i++)
                 {
-                    digitOfNumber = number % 10;
-                    number /= 10;
+                    number = i;
+                    int sumOdds = 0;
+                    int sumEvens = 0;
 
-                    if ((digitOfNumber % 2) == 1)
+                    while (number != 0)
                     {
-                        sumOdds += digitOfNumber;
+                        digitOfNumber = number % 10;
+                        number /= 10;
+
+                        if ((digitOfNumber % 2) == 1)
+                        {
+                            sumOdds += digitOfNumber;
+                        }
+                        else
+                        {
+                            sumEvens += digitOfNumber;
+                        }
                     }
-                    else
+
+                    if (sumEvens > sumOdds)
                     {
-                        sumEvens += digitOfNumber;
+                        ++count;
                     }
                 }
 
-                if (sumEvens > sumOdds)
+                int[] array = new int[count];
+                int j = 0;
+
+                for (int i = 1; i < integer; i++)
                 {
-                    ++count;
+                    number = i;
+                    int sumOdds = 0;
+                    int sumEvens = 0;
+
+                    while (number != 0)
+                    {
+                        digitOfNumber = number % 10;
+                        number /= 10;
+
+                        if ((digitOfNumber % 2) == 1)
+                        {
+                            sumOdds += digitOfNumber;
+                        }
+                        else
+                        {
+                            sumEvens += digitOfNumber;
+                        }
+                    }
+
+                    if (sumEvens > sumOdds)
+                    {
+                        array[j] = i;
+                        j++;
+                    }
                 }
+
+                return array;
             }
 
-            int[] array = new int[count];
-            int j = 0;
+            throw new ArgumentException("Number must be a positive integer greater than 2");
 
-            for (int i = 1; i < integer; i++)
-            {
-                number = i;
-                int sumOdds = 0;
-                int sumEvens = 0;
-
-                while (number != 0)
-                {
-                    digitOfNumber = number % 10;
-                    number /= 10;
-
-                    if ((digitOfNumber % 2) == 1)
-                    {
-                        sumOdds += digitOfNumber;
-                    }
-                    else
-                    {
-                        sumEvens += digitOfNumber;
-                    }
-                }
-
-                if (sumEvens > sumOdds)
-                {
-                    array[j++] = i;
-                }
-            }
-
-            return array;
         }
 
         public static bool CheckDuplicateDigitsInNumbers(int a, int b)
         {
-            if (a > 0 || b > 0)
+            if (a > 0 && b > 0)
             {
                 bool isMutualDigit = false;
                 int digitOfA;

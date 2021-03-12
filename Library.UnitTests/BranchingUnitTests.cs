@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System;
 
 namespace Library.UnitTests
 {
@@ -27,6 +28,17 @@ namespace Library.UnitTests
         {
             double actual = Branching.GetPointQuarter(x, y);
             Assert.AreEqual(expected, actual);
+        }
+
+        [TestCase(0, 0)]
+        [TestCase(0, 5)]
+        [TestCase(4, 0)]
+        [TestCase(0, -5)]
+        [TestCase(-4, 0)]
+
+        public void GetPointQuarterNegativeTests(int x, int y)
+        {
+            Assert.Throws<ArgumentException>(() => Branching.GetPointQuarter(x, y));
         }
 
         [TestCase(3, 2, 1, 1, 2, 3)]
@@ -58,6 +70,17 @@ namespace Library.UnitTests
             Assert.AreEqual(expected, actual);
         }
 
+        [TestCase(0, 0, 0)]
+        [TestCase(0, 1, 1)]
+        [TestCase(0, 2, 2)]
+        [TestCase(0, -3, 3)]
+        [TestCase(0, 4, -4)]
+
+        public void GetQuadraticDiscriminantNegativeTests(double a, double b, double c)
+        {
+            Assert.Throws<ArgumentException>(() => Branching.GetQuadraticDiscriminant(a, b, c));
+        }
+
         [TestCase(1, -2, -3, new double[] { 3, -1 })]
         [TestCase(-1, -2, 15, new double[] { -5, 3 })]
         [TestCase(1, 12, 36, new double[] { -6 })]
@@ -70,6 +93,17 @@ namespace Library.UnitTests
             Assert.AreEqual(expected, actual);
         }
 
+        [TestCase(0, 0, 0)]
+        [TestCase(0, 1, 1)]
+        [TestCase(0, 2, 2)]
+        [TestCase(0, -3, 3)]
+        [TestCase(0, 4, -4)]
+
+        public void GetSquareEquationRootsNegativeTests(double a, double b, double c)
+        {
+            Assert.Throws<ArgumentException>(() => Branching.GetSquareEquationRoots(a, b, c));
+        }
+
         [TestCase(11, "одиннадцать")]
         [TestCase(34, "тридцать четыре")]
         [TestCase(50, "пятьдесят ")]
@@ -80,6 +114,17 @@ namespace Library.UnitTests
         {
             string actual = Branching.RightTwoDigitNumberInWords(number);
             Assert.AreEqual(expected, actual);
+        }
+
+        [TestCase(0)]
+        [TestCase(9)]
+        [TestCase(100)]
+        [TestCase(-5)]
+        [TestCase(150)]
+
+        public void RightTwoDigitNumberInWordsNegativeTests(int number)
+        {
+            Assert.Throws<ArgumentException>(() => Branching.RightTwoDigitNumberInWords(number));
         }
     }
 }

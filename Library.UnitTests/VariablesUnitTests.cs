@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System;
 
 namespace Library.UnitTests
 {
@@ -14,6 +15,17 @@ namespace Library.UnitTests
         {
             double actual = Variables.SolveEquation(a, b);
             Assert.AreEqual(expected, actual);
+        }
+
+        [TestCase(5, 5)]
+        [TestCase(0, 0)]
+        [TestCase(7, 7)]
+        [TestCase(4, 4)]
+        [TestCase(-4, -4)]
+
+        public void SolveEquationNegativeTests(double a, double b)
+        {
+            Assert.Throws<ArgumentException>(() => Variables.SolveEquation(a, b));
         }
 
         [TestCase(4, 5, 5, 4)]
@@ -43,6 +55,17 @@ namespace Library.UnitTests
             Assert.AreEqual(expected, actual);
         }
 
+        [TestCase(0, 0)]
+        [TestCase(4, 0)]
+        [TestCase(5, 0)]
+        [TestCase(-6, 0)]
+        [TestCase(-8, 0)]
+
+        public void GetADividedByBAndRemainderAfterDivisionOfAByBNegativeTests(double a, double b)
+        {
+            Assert.Throws<DivideByZeroException>(() => Variables.GetADividedByBAndRemainderAfterDivisionOfAByB(a, b));
+        }
+
         [TestCase(1, 2, 4, 2)]
         [TestCase(4, 0, 1, 0.25)]
         [TestCase(9, 9, 0, -1)]
@@ -53,6 +76,17 @@ namespace Library.UnitTests
         {
             double actual = Variables.GetLinearEquationSolution(a, b, c);
             Assert.AreEqual(expected, actual);
+        }
+
+        [TestCase(0, 5, 7)]
+        [TestCase(0, 2, 4)]
+        [TestCase(0, 0, 0)]
+        [TestCase(0, 4, -1)]
+        [TestCase(0, -4, 5)]
+
+        public void GetLinearEquationSolutionNegativeTests(double a, double b, double c)
+        {
+            Assert.Throws<DivideByZeroException>(() => Variables.GetLinearEquationSolution(a, b, c));
         }
 
         [TestCase(1, 1, 2, 2, 1, 0)]
@@ -66,6 +100,17 @@ namespace Library.UnitTests
             (double actualA, double actualB) = Variables.GetStraightLineEquation(x1, y1, x2, y2);
             Assert.AreEqual(expectedA, actualA);
             Assert.AreEqual(expectedB, actualB);
+        }
+
+        [TestCase(0, 5, 0, 3)]
+        [TestCase(1, 2, 1, 4)]
+        [TestCase(2, 2, 2, 2)]
+        [TestCase(3, 3, 3, 3)]
+        [TestCase(-1, 2, -1, 4)]
+
+        public void GetStraightLineEquationNegativeTests(double x1, double y1, double x2, double y2)
+        {
+            Assert.Throws<ArgumentException>(() => Variables.GetStraightLineEquation(x1, y1, x2, y2));
         }
     }
 }

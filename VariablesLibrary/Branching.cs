@@ -26,7 +26,7 @@ namespace Library
 
         public static int GetPointQuarter(int x, int y)
         {
-            if (x != 0 || y != 0)
+            if (x != 0 && y != 0)
             {
                 int result = 0;
 
@@ -124,7 +124,7 @@ namespace Library
 
         public static string RightTwoDigitNumberInWords(int number)
         {
-            if (number > 9 || number < 100)
+            if (number > 9 && number < 100)
             {
                 string str = string.Empty;
 
@@ -235,7 +235,7 @@ namespace Library
                 return str;
             }
 
-            throw new ArgumentException("The number must be two-digit");
+            throw new ArgumentException("The number must be two-digit positive integer");
         }
     }
 }
